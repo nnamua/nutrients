@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rect"
+    android:backgroundTint="@color/lightGrey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp">
+
+        <ImageButton
+            android:id="@+id/planBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:tint="@color/darkTone"
+            app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/planSelectWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="2dp"
+            app:srcCompat="@drawable/ic_date_range_black_36dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/planCalWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/varela_round"
+        android:text="Kalenderwoche 16"
+        android:textColor="@color/darkTone"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Füge hier alle deine verzehrten Lebensmittel dieser Woche hinzu. Nutze die Pfeile oben rechts, um zwischen verschiedenen Wochen zu navigieren."
+        android:textAlignment="center"
+        android:textColor="@color/standardTone" />
+
+    <ExpandableListView
+        android:id="@+id/planExpListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:groupIndicator="@null"
+        android:listSelector="@drawable/rect"/>
+
+    <Button
+        android:id="@+id/planNewEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_rect"
+        android:backgroundTint="@color/standardTone"
+        android:fontFamily="@font/roboto_black"
+        android:text="Neuer Eintrag"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Panel">
+        <attr name="name" format="string" localization="suggested" />
+        <attr name="src" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="Indicator">
+        <attr name="label" format="string" localization="suggested" />
+    </declare-styleable>
+
+</resources>

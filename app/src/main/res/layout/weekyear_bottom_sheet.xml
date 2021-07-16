@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/weekTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:fontFamily="@font/varela_round"
+        android:padding="5dp"
+        android:text="Kalenderwoche X, YYYY"
+        android:textAlignment="center"
+        android:textColor="@color/darkTone"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/weekPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/standardTone" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <NumberPicker
+            android:id="@+id/weekNumberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            tools:layout_conversion_absoluteHeight="180dp"
+            tools:layout_conversion_absoluteWidth="64dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="86dp" />
+
+        <NumberPicker
+            android:id="@+id/yearNumberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            tools:layout_conversion_absoluteHeight="180dp"
+            tools:layout_conversion_absoluteWidth="64dp"
+            tools:layout_editor_absoluteX="84dp"
+            tools:layout_editor_absoluteY="86dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/weekConfirm"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/standardTone"
+        android:layout_marginTop="20dp"
+        android:text="OK" />
+
+</LinearLayout>

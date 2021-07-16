@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Nutrients</string>
+
+    <!-- Main menu items -->
+    <string name="plan_menu_name">Plan</string>
+    <string name="nutrients_menu_name">Nährwerte</string>
+    <string name="history_menu_name">Verläufe</string>
+
+    <!-- Food item infos -->
+    <string name="energy_kJ">Energie, Kilojoule (kJ)</string>
+    <string name="energy_kcal">Energie, Kalorien (kcal)</string>
+    <string name="fat_total">Fett, total (g)</string>
+    <string name="fatty_acids_saturated">Fettsäuren, gesättigt (g)</string>
+    <string name="fatty_acids_monounsaturated">Fettsäuren, einfach ungesättigt (g)</string>
+    <string name="fatty_acids_polyunsaturated">Fettsäuren, mehrfach ungesättigt (g)</string>
+    <string name="cholesterol">Cholesterin (mg)</string>
+    <string name="carbohydrates">Kohlenhydrate, verfügbar (g)</string>
+    <string name="sugar">Zucker (g)</string>
+    <string name="starch">Stärke (g)</string>
+    <string name="dietary_fiber">Nahrungsfasern (g)</string>
+    <string name="proteins">Protein (g)</string>
+    <string name="salt">Salz (NaCl) (g)</string>
+    <string name="alcohol">Alkohol (g)</string>
+    <string name="water">Wasser (g)</string>
+    <string name="vitamin_a_re">Vitamin A-Aktivität, RE (µg-RE)</string>
+    <string name="vitamin_a_rae">Vitamin A-Aktivität, RAE (µg-RE)</string>
+    <string name="retinol">Retinol (µg)</string>
+    <string name="beta_carotene_bce">Betacarotin-Aktivität (µg-BCE)</string>
+    <string name="beta_carotene">Betacarotin (µg)</string>
+    <string name="vitamin_b1">Vitamin B1 (Thiamin) (mg)</string>
+    <string name="vitamin_b2">Vitamin B2 (Riboflavin) (mg)</string>
+    <string name="vitamin_b6">Vitamin B6 (Pyridoxin) (mg)</string>
+    <string name="vitamin_b12">Vitamin B12 (Cobalamin) (µg)</string>
+    <string name="niacin">Niacin (mg)</string>
+    <string name="folat">Folat (µg)</string>
+    <string name="pantothenic_acid">Pantothensäure (mg)</string>
+    <string name="vitamin_c">Vitamin C (Ascorbinsäure) (mg)</string>
+    <string name="vitamin_d">Vitamin D (Calciferol) (µg)</string>
+    <string name="vitamin_e_ate">Vitamin E-Aktivität (mg-ATE)</string>
+    <string name="potassium">Kalium (K) (mg)</string>
+    <string name="sodium">Natrium (Na) (mg)</string>
+    <string name="chloride">Chlorid (Cl) (mg)</string>
+    <string name="calcium">Calcium (Ca) (mg)</string>
+    <string name="magnesium">Magnesium (Mg) (mg)</string>
+    <string name="phosphorus">Phosphor (P) (mg)</string>
+    <string name="iron">Eisen (Fe) (mg)</string>
+    <string name="iodine">Jod (I) (µg)</string>
+    <string name="zinc">Zink (Zn)  (mg)</string>
+    <string name="selenium">Selen (Se) (µg)</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

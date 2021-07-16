@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <TextView
+        android:id="@+id/bottomSheetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:padding="5dp"
+        android:text="Name"
+        android:textColor="@color/darkTone"
+        android:textSize="26sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <SeekBar
+            android:id="@+id/bottomAmountSlider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:minHeight="40dp"
+            android:progressTint="@color/standardTone"
+            android:thumbTint="@color/standardTone" />
+
+        <EditText
+            android:id="@+id/bottomAmountInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:ems="3"
+            android:fontFamily="@font/varela_round"
+            android:inputType="numberDecimal"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/bottomAmountLabel"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="10dp"
+            android:padding="2dp"
+            android:text="mg"
+            android:textAlignment="textEnd"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bottomButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/standardTone"
+        android:text="Hinzufügen" />
+
+</LinearLayout>

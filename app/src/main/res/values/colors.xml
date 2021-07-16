@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0099ff</color>
+    <color name="colorPrimaryDark">#0099ff</color>
+    <color name="colorAccent">#0099ff</color>
+
+    <!-- Submenu colors -->
+    <color name="planColor1">#29ABE2</color>
+    <color name="planColor2">#2E3192</color>
+
+    <color name="nutrientsColor1">#FBD83B</color>
+    <color name="nutrientsColor2">#F19924</color>
+
+    <color name="historyColor1">#D4655A</color>
+    <color name="historyColor2">#D4145A</color>
+
+    <!-- Other colors -->
+    <color name="waveColor">#0099FF</color>
+    <color name="fontColorDark">#323954</color>
+    <color name="fontColorLight">#ACB0C9</color>
+    <color name="white">#FFFFFF</color>
+    <color name="lightGrey">#FAFAFA</color>
+
+    <!-- Main color palette -->
+    <color name="highlight">#E63946</color>
+    <color name="background">#F1FAEE</color>
+    <color name="lightTone">#A8DADC</color>
+    <color name="standardTone">#457B9D</color>
+    <color name="darkTone">#1D3557</color>
+
+    <!-- Indicator colors -->
+    <color name="indicatorBar">#80B28A</color>
+
+    <!-- Special colors -->
+    <color name="constructionOrange">#FF7708</color>
+
+</resources>

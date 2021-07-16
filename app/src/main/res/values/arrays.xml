@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_data_labels">
+        <item>Bezugseinheit</item>
+        <item>Energie, Kilojoule (kJ)</item>
+        <item>Energie, Kalorien (kcal)</item>
+        <item>Fett, total (g)</item>
+        <item>Fettsäuren, gesättigt (g)</item>
+        <item>Fettsäuren, einfach ungesättigt (g)</item>
+        <item>Fettsäuren, mehrfach ungesättigt (g)</item>
+        <item>Cholesterin (mg)</item>
+        <item>Kohlenhydrate, verfügbar (g)</item>
+        <item>Zucker (g)</item>
+        <item>Stärke (g)</item>
+        <item>Nahrungsfasern (g)</item>
+        <item>Protein (g)</item>
+        <item>Salz (NaCl) (g)</item>
+        <item>Alkohol (g)</item>
+        <item>Wasser (g)</item>
+        <item>Vitamin A-Aktivität, RE (µg-RE)</item>
+        <item>Vitamin A-Aktivität, RAE (µg-RE)</item>
+        <item>Retinol (µg)</item>
+        <item>Betacarotin-Aktivität (µg-BCE)</item>
+        <item>Betacarotin (µg)</item>
+        <item>Vitamin B1 (Thiamin) (mg)</item>
+        <item>Vitamin B2 (Riboflavin) (mg)</item>
+        <item>Vitamin B6 (Pyridoxin) (mg)</item>
+        <item>Vitamin B12 (Cobalamin) (µg)</item>
+        <item>Niacin (mg)</item>
+        <item>Folat (µg)</item>
+        <item>Pantothensäure (mg)</item>
+        <item>Vitamin C (Ascorbinsäure) (mg)</item>
+        <item>Vitamin D (Calciferol) (µg)</item>
+        <item>Vitamin E-Aktivität (mg-ATE)</item>
+        <item>Kalium (K) (mg)</item>
+        <item>Natrium (Na) (mg)</item>
+        <item>Chlorid (Cl) (mg)</item>
+        <item>Calcium (Ca) (mg)</item>
+        <item>Magnesium (Mg) (mg)</item>
+        <item>Phosphor (P) (mg)</item>
+        <item>Eisen (Fe) (mg)</item>
+        <item>Jod (I) (µg)</item>
+        <item>Zink (Zn)  (mg)</item>
+        <item>Selen (Se) (µg)</item>
+    </string-array>
+</resources>

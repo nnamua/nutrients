@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.paulaumann.nutrients.model.Food
 
 @Database(entities = [Consumed::class, Food::class], version=1)
 @TypeConverters(Converters::class)

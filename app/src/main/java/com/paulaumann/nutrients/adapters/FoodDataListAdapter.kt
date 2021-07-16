@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.paulaumann.nutrients.R
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.data.Food
 import kotlin.math.abs
 
 class FoodDataListAdapter(context: Context) :

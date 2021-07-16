@@ -1,6 +1,5 @@
 package com.paulaumann.nutrients.data
 
-import com.paulaumann.nutrients.model.Food
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 import javax.inject.Inject

@@ -1,7 +1,7 @@
-package com.paulaumann.nutrients.model
+package com.paulaumann.nutrients.analytics
 
 import com.paulaumann.nutrients.data.ConsumedFood
-import com.paulaumann.nutrients.data.FoodDao
+import com.paulaumann.nutrients.data.Food
 
 open class Analytics() {
 

@@ -1,12 +1,11 @@
 package com.paulaumann.nutrients.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulaumann.nutrients.adapters.WeekListAdapter
 import com.paulaumann.nutrients.data.*
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.data.Food
 import com.paulaumann.nutrients.util.toTimeRange
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect

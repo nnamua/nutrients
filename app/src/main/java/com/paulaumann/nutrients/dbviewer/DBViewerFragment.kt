@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulaumann.nutrients.BaseFragment
 import com.paulaumann.nutrients.adapters.FoodListAdapter
 import com.paulaumann.nutrients.databinding.FragmentDbviewerBinding
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.data.Food
 import com.paulaumann.nutrients.viewmodel.DBViewerViewModel
 
 class DBViewerFragment : BaseFragment() {
@@ -25,7 +25,7 @@ class DBViewerFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDbviewerBinding.inflate(inflater, container, false)
         return binding.root
     }

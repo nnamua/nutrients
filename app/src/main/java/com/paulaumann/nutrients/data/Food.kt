@@ -1,9 +1,8 @@
-package com.paulaumann.nutrients.model
+package com.paulaumann.nutrients.data
 
 import android.util.Log
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.security.KeyException
 import kotlin.math.round
@@ -82,7 +81,7 @@ data class Food(
             Log.d("URGENT ERROR", "Reference string does not match regex, returning default 'mg' for '" + reference + "'")
             return "mg"
         }
-        var unit = "";
+        var unit = ""
         reference.forEach {
             if (it.isLetter()) unit += it
         }
@@ -95,7 +94,7 @@ data class Food(
             Log.d("URGENT ERROR", "Reference string does not match regex, returning default '100' for '" + reference + "'")
             return 100.0
         }
-        var amount = "";
+        var amount = ""
         reference.forEach {
             if (it.isDigit()) amount += it
         }

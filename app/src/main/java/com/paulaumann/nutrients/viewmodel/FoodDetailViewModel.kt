@@ -1,11 +1,9 @@
 package com.paulaumann.nutrients.viewmodel
 
 import androidx.lifecycle.*
-import com.paulaumann.nutrients.data.AppDatabase
 import com.paulaumann.nutrients.data.FoodRepository
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.data.Food
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

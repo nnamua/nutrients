@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paulaumann.nutrients.history.StackBarFragment
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.data.Food
 import java.util.*
 
 class HistoryFragmentAdapter(private val itemcount: Int, fm: FragmentManager, lifecycle: Lifecycle)

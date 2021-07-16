@@ -1,7 +1,6 @@
 package com.paulaumann.nutrients.data
 
 import androidx.room.*
-import com.paulaumann.nutrients.model.Food
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 

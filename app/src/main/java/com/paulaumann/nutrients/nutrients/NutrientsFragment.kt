@@ -7,12 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulaumann.nutrients.BaseFragment
-import com.paulaumann.nutrients.MainActivity
 import com.paulaumann.nutrients.adapters.FoodDataListAdapter
-import com.paulaumann.nutrients.data.AppDatabase
 import com.paulaumann.nutrients.databinding.FragmentNutrientsBinding
-import com.paulaumann.nutrients.model.Analytics
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.analytics.Analytics
 import com.paulaumann.nutrients.util.WeekPicker
 import com.paulaumann.nutrients.viewmodel.NutrientsViewModel
 
@@ -27,7 +24,7 @@ class NutrientsFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNutrientsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -61,7 +58,7 @@ class NutrientsFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null;
+        _binding = null
     }
 
 }

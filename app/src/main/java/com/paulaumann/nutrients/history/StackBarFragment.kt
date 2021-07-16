@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.paulaumann.nutrients.R
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.data.Food
 import com.paulaumann.nutrients.views.StackBarChart
 
 class StackBarFragment(private val pos: Int, private val foodList: List<Food>) : Fragment() {

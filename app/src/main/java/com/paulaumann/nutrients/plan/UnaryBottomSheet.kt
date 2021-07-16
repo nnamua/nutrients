@@ -12,7 +12,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paulaumann.nutrients.R
-import com.paulaumann.nutrients.model.Food
+import com.paulaumann.nutrients.data.Food
 import java.lang.NumberFormatException
 import kotlin.math.log10
 import kotlin.math.pow

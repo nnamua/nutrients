@@ -5,13 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.paulaumann.nutrients.views.StackBarChart
-        android:id="@+id/historyStackBarChart"
-        android:layout_width="300dp"
-        android:layout_height="600dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.paulaumann.nutrients.views.StackBarChart
+                android:id="@+id/historyStackBarChart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

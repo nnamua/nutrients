@@ -29,9 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@null"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            app:srcCompat="@drawable/ic_more_vert_black_24dp"
+            app:srcCompat="@drawable/ic_baseline_more_vert_24"
             app:tint="@color/darkTone" />
     </LinearLayout>
 
@@ -68,23 +66,44 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.paulaumann.nutrients.views.Indicator
-                android:id="@+id/vitaminIndicator"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:focusable="true"
-                android:clickable="true"
-                android:layout_marginTop="20dp"
-                android:padding="5dp"
-                app:label="Vitamin B" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp"
+                android:background="@drawable/rounded_rect">
 
-            <com.paulaumann.nutrients.views.Indicator
-                android:id="@+id/natriumIndicator"
+                <com.paulaumann.nutrients.views.Indicator
+                    android:id="@+id/vitaminIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="15dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="5dp"
+                    app:label="Vitamin B" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="20dp"
-                android:padding="5dp"
-                app:label="Natrium" />
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <com.paulaumann.nutrients.views.Indicator
+                    android:id="@+id/natriumIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="15dp"
+                    android:padding="5dp"
+                    app:label="Natrium" />
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

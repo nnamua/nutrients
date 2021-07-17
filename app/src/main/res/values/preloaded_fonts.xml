@@ -2,6 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/roboto_black</item>
+        <item>@font/rubik</item>
+        <item>@font/rubik_light</item>
         <item>@font/varela_round</item>
     </array>
 </resources>

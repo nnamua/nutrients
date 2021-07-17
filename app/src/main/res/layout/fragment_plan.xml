@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rect"
-    android:backgroundTint="@color/lightGrey"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,9 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:scaleX="2"
-            android:scaleY="2"
-            app:srcCompat="@drawable/ic_chevron_left_black_24dp"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
             app:tint="@color/darkTone" />
 
         <View
@@ -80,19 +77,17 @@
         android:layout_weight="1"
         android:divider="@null"
         android:groupIndicator="@null"
-        android:listSelector="@drawable/rect"/>
+        android:listSelector="@drawable/rect" />
 
     <Button
         android:id="@+id/planNewEntry"
-        android:layout_width="match_parent"
+        style="?attr/materialButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:layout_margin="15dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/rounded_rect"
-        android:backgroundTint="@color/standardTone"
-        android:fontFamily="@font/roboto_black"
         android:text="Neuer Eintrag"
-        android:textColor="@color/white"
         android:textSize="18sp" />
 
 </LinearLayout>

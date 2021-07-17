@@ -28,7 +28,6 @@ fun toTimeRange(week: Int, year: Int): Pair<Date, Date> {
     // Retrieve entries before monday of next week
     calendar.add(Calendar.WEEK_OF_YEAR, 1)
     val before = calendar.time
-    Log.d("toTimeRange", "week=$week, year=$year, after=$after, before=$before")
     return Pair(after, before)
 }
 

@@ -61,10 +61,11 @@
 
     <Button
         android:id="@+id/bottomButton"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="?attr/materialButtonStyle"
+        android:backgroundTint="@color/standardTone"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/standardTone"
         android:text="Hinzufügen" />
 
 </LinearLayout>

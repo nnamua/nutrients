@@ -30,7 +30,7 @@ class WeekPicker(private val callback: (week: Int, year: Int) -> Unit,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.weekyear_bottom_sheet, container, false)
+        val view = inflater.inflate(R.layout.weekpicker_bottom_sheet, container, false)
         weekNumberPicker = view.findViewById(R.id.weekNumberPicker)
         yearNumberPicker = view.findViewById(R.id.yearNumberPicker)
         weekTitle        = view.findViewById(R.id.weekTitle)

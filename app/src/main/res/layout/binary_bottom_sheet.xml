@@ -61,18 +61,18 @@
 
     <Button
         android:id="@+id/bottomConfirm"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="?attr/materialButtonStyle"
+        android:backgroundTint="@color/standardTone"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/standardTone"
         android:text="OK" />
 
     <Button
         android:id="@+id/bottomDelete"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/highlight"
         android:text="Entfernen" />
 
 </LinearLayout>

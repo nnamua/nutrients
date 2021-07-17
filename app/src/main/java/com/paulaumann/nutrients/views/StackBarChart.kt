@@ -6,6 +6,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.graphics.Paint.ANTI_ALIAS_FLAG
+import android.icu.util.Measure
 import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
@@ -16,23 +17,31 @@ import android.view.animation.AnimationSet
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.withTranslation
+import androidx.core.util.rangeTo
 import com.paulaumann.nutrients.R
+import com.paulaumann.nutrients.data.ConsumedFood
+import java.lang.Double.max
+import kotlin.math.ceil
+import kotlin.properties.Delegates
 
 class StackBarChart : View {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    private val values = mutableMapOf<String, Double>()
-    private val rectangles = mutableMapOf<String, RectF>()
-    private val labels = mutableMapOf<String, Pair<StaticLayout, PointF>>()
+    private val values = mutableListOf<Pair<String, Double>>()
+    private val layouts = mutableListOf<StaticLayout>()
+    private val layoutPlacements = mutableListOf<PointF>()
+    private val rectangles = mutableListOf<RectF>()
 
     private var total = 0.0
-    private var selected = ""
+    private var selected: Int = -1
 
+    private val paddingCenter = 10.0
     private val relRectPadding = 0.02
-    private val relBarWidth = 0.5
-    private val relBarOffset = 0.02
+    private val selectedScale = 0.8
+
+    private var heightMode: Int = MeasureSpec.UNSPECIFIED
 
     private var varelaRound = ResourcesCompat.getFont(context, R.font.varela_round)
     private val rectPaint = Paint(ANTI_ALIAS_FLAG).apply {
@@ -64,120 +73,193 @@ class StackBarChart : View {
 
     private var selectedExtraLabel: Pair<StaticLayout, PointF>? = null
 
-    fun add(key: String, value: Double){
-        if (key in values) total -= values[key]!!
-        values[key] = value
-        total += value
+    private fun _add(pair: Pair<String, Double>){
+        values.add(pair)
+        total += pair.second
+        val layout = StaticLayout.Builder
+            .obtain(pair.first, 0, pair.first.length, labelPaint, (paddingLeft + width / 2))
+            .build()
+        layouts.add(layout)
+    }
+
+    fun add(label: String, value: Double){
+        if (value < 0.001) return
+        _add(Pair(label, value))
+        recalculate()
         invalidate()
     }
 
-    fun remove(key: String){
-        if (key in values){
-            total -= values[key]!!
-            values.remove(key)
+    fun add(list: List<Pair<String, Double>>){
+        for (pair in list){
+            if (pair.second < 0.001) return
+            _add(pair)
         }
+        recalculate()
         invalidate()
     }
 
-    fun select(key: String){
-        if (key == "" || key in values.keys) {
-            val previous = selected
-            selected = key
+    fun clear(){
+        values.clear()
+        layouts.clear()
+        total = 0.0
+        recalculate()
+        invalidate()
+    }
 
-            /* Animate selected:
-                (1) Move main label to the top of the rectangle
-                (3) ???
-             */
+    fun select(i: Int){
+        val previous = selected
+        selected = i
 
-            if (key != ""){
-                val rect   = rectangles[key]
-                val layout = labels[key]?.first
-                val pos    = labels[key]?.second
+        /* Animate selected:
+            (1) Move main label to the top of the rectangle
+            (3) ???
+         */
 
-                if (rect != null && layout != null && pos != null) {
+        if (i != -1){
+            val rect   = rectangles[i]
+            val layout = layouts[i]
+            val pos    = layoutPlacements[i]
 
-                    // (1) This animation moves the main label to the top
-                    val from = pos.y
-                    val to = rect.top
-                    val labelAnim = ValueAnimator.ofFloat(from, to).apply {
-                        duration = 200
-                        addUpdateListener {
-                            labels[key]?.second?.y = animatedValue as Float
-                            invalidate()
-                        }
-                    }
-
-                    // (2) This adds the exact amount below the main label
-                    /*
-                    val extra = values[key].toString()
-
-                    val width = layout.width
-                    val extraFrom = rect.right
-                    val extraTo = pos.x
-                    val extraY = rect.top + layout.height * 1.3
-                    val extraLayout = StaticLayout.Builder
-                        .obtain(extra, 0, extra.length, extraTextPaint, width)
-                        .build()
-                    val extraPos = PointF(-100f, extraY.toFloat())
-                    selectedExtraLabel = Pair(extraLayout, extraPos)
-
-                    val extraAnim = ValueAnimator.ofFloat(extraFrom, extraTo).apply {
-                        duration = 100
-                        addUpdateListener {
-                            selectedExtraLabel?.second?.x = animatedValue as Float
-                            invalidate()
-                        }
-                    }
-                    */
-
-                    // Play animations
-                    val animSet = AnimatorSet()
-                    //animSet.playSequentially(labelAnim, extraAnim)
-                    animSet.playSequentially(labelAnim)
-                    animSet.start()
-
+            // (1) This animation moves the main label to the top
+            val from = pos.y
+            val to = rect.top
+            val labelAnim = ValueAnimator.ofFloat(from, to).apply {
+                duration = 200
+                addUpdateListener {
+                    pos.y = animatedValue as Float
+                    invalidate()
                 }
-
             }
 
-            onSizeChanged(width, height, width, height)
-            invalidate()
+            // (2) This adds the exact amount below the main label
+            /*
+            val extra = values[key].toString()
+
+            val width = layout.width
+            val extraFrom = rect.right
+            val extraTo = pos.x
+            val extraY = rect.top + layout.height * 1.3
+            val extraLayout = StaticLayout.Builder
+                .obtain(extra, 0, extra.length, extraTextPaint, width)
+                .build()
+            val extraPos = PointF(-100f, extraY.toFloat())
+            selectedExtraLabel = Pair(extraLayout, extraPos)
+
+            val extraAnim = ValueAnimator.ofFloat(extraFrom, extraTo).apply {
+                duration = 100
+                addUpdateListener {
+                    selectedExtraLabel?.second?.x = animatedValue as Float
+                    invalidate()
+                }
+            }
+            */
+
+            // Play animations
+            val animSet = AnimatorSet()
+            //animSet.playSequentially(labelAnim, extraAnim)
+            animSet.playSequentially(labelAnim)
+            animSet.start()
+
+        }
+
+        onSizeChanged(width, height, width, height)
+        invalidate()
+    }
+
+    // In an optimal case, this view is running with layout_height set to wrap_content.
+    // Only here it is guaranteed, that every label fits onto the screen.
+    // To guarantee this, final rectangle heights are calculated in the following way:
+    // First, the text height and rectangle height is calculated for every entry
+    // (Here, rectangle height means entry value divided by total value, or share of total height).
+    // By dividing text height by rectangle height, we can calculate by how much
+    // the rectangle would need to be scaled to match the text.
+    // We only store the maximum value of these factors (the smallest rectangle compared to its text)
+    // Now we can iterate over our entries again, this time multiplying the
+    // rectangle height with our maximum factor. This way, we guarantee that:
+    // (1) Rectangles share the same ratios as without scaling
+    // (2) Every rectangle is as least as big as the corresponding text
+
+    private fun recalculateWithWrapContent(){
+        val rectPadding = 10f
+        // |  <->   RECT  <->   TEXT  <-> |
+        //   pLeft      pCenter      pRight
+        val rectWidth = (width - paddingLeft - paddingCenter - paddingRight) / (2 * selectedScale)
+        val barOffset = rectWidth / 2 * (selectedScale - 1)
+
+
+        // Calculate maxScale
+        var maxScale: Double = 1.0
+        val rectShares = mutableListOf<Double>()
+        for (i in values.indices){
+            val value = values[i].second
+            val rectTotalShare = value / total
+            rectShares.add(rectTotalShare)
+            val scale = layouts[i].height / rectTotalShare
+            maxScale = max(maxScale, scale)
+        }
+
+        // Calculate rectangles and layout placements
+        rectangles.clear()
+        layoutPlacements.clear()
+        var yOffset: Float = paddingTop.toFloat()
+        for (i in values.indices){
+            // Rectangle
+            val rectHeight = rectShares[i] * maxScale
+            val isSelected = (i == selected)
+            Log.d("StackBarChart", "$i $isSelected")
+            val left   = if (isSelected) paddingLeft.toFloat() else (paddingLeft + barOffset).toFloat()
+            val top    = yOffset
+            val right  = if (isSelected) (width - paddingCenter) / 2 else (width - paddingCenter) / 2 - barOffset
+            val bottom = yOffset + rectHeight
+            val rect = RectF(left, top, right.toFloat(), bottom.toFloat())
+            rectangles.add(rect)
+
+            // Layout placement
+            val layout = layouts[i]
+            val layoutX = (width + paddingCenter) / 2
+            val layoutY = yOffset + rectHeight / 2f - layout.height / 2f
+            layoutPlacements.add(PointF(layoutX.toFloat(), layoutY.toFloat()))
+
+            yOffset += rectHeight.toFloat() + rectPadding
+        }
+
+        // Set height so that the entire chart fits into the view
+        Log.d("StackBarChart", "Using a height of $yOffset.")
+        layoutParams.height = ceil(yOffset).toInt()
+        setLayoutParams(layoutParams)
+
+    }
+
+    private fun recalculate(){
+        if (heightMode == MeasureSpec.UNSPECIFIED) {
+            recalculateWithWrapContent()
+        }
+        // TODO: Recalculation for other MeasureSpec modes
+        // Because onMeasure is called with EXACT after the height is set
+        // by recalculateWithWrapContent(), I will just use the previously
+        // calculated placements and rectangles
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        Log.d("StackBarChart", "Received mode ${MeasureSpec.getMode(heightMeasureSpec)}")
+        Log.d("StackBarChart", "Received size ${MeasureSpec.getSize(heightMeasureSpec)}")
+
+        /*
+            If the mode is UNSPECIFIED (-> wrap_content) return 0,
+            and enlarge the view as necessary.
+         */
+
+        if (heightMode == MeasureSpec.UNSPECIFIED) {
+            setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), 0)
+        } else {
+            setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
         }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        val rectPadding = (height - (paddingBottom + paddingTop)) * relRectPadding
-        // Height without any padding
-        val barH = height - (paddingBottom + paddingTop) - rectPadding * (values.size - 1)
-        val barW = width * relBarWidth
-        val barOffset = width * relBarOffset
-
-        // Re-calculate rectangles and label positions
-        rectangles.clear()
-        labels.clear()
-        var yOffset = paddingTop.toFloat()
-        for (key in values.keys){
-            val isSelected = (key == selected)
-            val value: Double = values[key] ?: continue
-            val rectH = (value / total) * barH
-            val left   = if (isSelected) paddingLeft.toFloat() else (paddingLeft + barOffset).toFloat()
-            val top    = yOffset
-            val right  = if (isSelected) left + barW + barOffset else paddingLeft + barW
-            val bottom = yOffset + rectH.toFloat()
-            val rect = RectF(left, top, right.toFloat(), bottom)
-            rectangles[key] = rect
-
-            val paint = if (key == selected) selectedLabelPaint else labelPaint
-            val labelX = right + rectPadding
-            val layout = StaticLayout.Builder
-                .obtain(key, 0, key.length, paint, (width - paddingRight - labelX).toInt())
-                .build()
-            val labelY = yOffset + rectH / 2f - layout.height / 2f
-            labels[key] = Pair(layout, PointF(labelX.toFloat(), labelY.toFloat()))
-
-            yOffset += (rectH + rectPadding).toFloat()
-        }
+        recalculate()
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -185,21 +267,22 @@ class StackBarChart : View {
         if (canvas == null) return;
 
         // Draw rectangles
-        for (key in rectangles.keys){
-            val rect = rectangles[key]
-            val paint = if (key == selected) selectedRectPaint else rectPaint
-            if (rect != null) canvas.drawRect(rect, paint)
+        for (i in values.indices){
+            val rect = rectangles[i]
+            val paint = if (i == selected) selectedRectPaint else rectPaint
+            canvas.drawRect(rect, paint)
         }
 
         // Draw labels
-        for (key in labels.keys){
-            val label = labels[key]
-            label?.first?.draw(canvas, label.second.x, label.second.y)
+        for (i in values.indices){
+            val layout = layouts[i]
+            val pos = layoutPlacements[i]
+            layout.draw(canvas, pos.x, pos.y)
         }
 
         // Draw extra information for selected
-        val extraLabel = selectedExtraLabel
-        extraLabel?.first?.draw(canvas, extraLabel.second.x, extraLabel.second.y)
+        //val extraLabel = selectedExtraLabel
+        //extraLabel?.first?.draw(canvas, extraLabel.second.x, extraLabel.second.y)
 
         // TODO: (1) Make rectangle expand when selected
         // TODO: (3) Animate everything smoothly
@@ -208,15 +291,15 @@ class StackBarChart : View {
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event?.action == MotionEvent.ACTION_DOWN) {
             var newSelection = false
-            for (key in rectangles.keys){
-                val rect = rectangles[key]
-                if (rect != null && rect.contains(event.x, event.y)){
-                    select(key)
+            for (i in 0 until rectangles.size){
+                val rect = rectangles[i]
+                if (rect.contains(event.x, event.y)){
+                    select(i)
                     newSelection = true
                     break
                 }
             }
-            if (!newSelection) select("")
+            if (!newSelection) select(-1)
         }
 
         return super.onTouchEvent(event)

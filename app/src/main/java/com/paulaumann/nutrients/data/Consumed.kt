@@ -19,4 +19,16 @@ data class Consumed (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var consumedId: Long = 0
+
+    override operator fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
+
+        other as Consumed
+        return consumedId == other.consumedId
+    }
+
+    override fun hashCode(): Int {
+        return foodId
+    }
 }

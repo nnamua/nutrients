@@ -9,4 +9,14 @@ data class ConsumedFood (
 
     @Relation(parentColumn = "food_id", entityColumn = "id")
     val food: Food
-)
+) {
+
+    override operator fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
+
+        other as ConsumedFood
+        return consumed.consumedId == other.consumed.consumedId
+    }
+
+}

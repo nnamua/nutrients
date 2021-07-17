@@ -12,7 +12,9 @@ import com.paulaumann.nutrients.adapters.HistoryFragmentAdapter
 import com.paulaumann.nutrients.databinding.FragmentHistoryBinding
 import com.paulaumann.nutrients.util.WeekPicker
 import com.paulaumann.nutrients.viewmodel.HistoryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryFragment : BaseFragment() {
 
     private var _binding: FragmentHistoryBinding? = null
@@ -37,7 +39,11 @@ class HistoryFragment : BaseFragment() {
         val labels: Array<String> = resources.getStringArray(R.array.food_data_labels)
 
         // Load pageViewer
-        fragmentAdapter = HistoryFragmentAdapter(labels.size - 1, mainActivity.supportFragmentManager, lifecycle)
+        fragmentAdapter = HistoryFragmentAdapter(
+            labels.size - 1,
+            mainActivity.supportFragmentManager,
+            lifecycle,
+            viewModel.entries )
         binding.historyViewPager.adapter = fragmentAdapter
         TabLayoutMediator(binding.historyTabLayout, binding.historyViewPager) { tab, position ->
             tab.text = labels[position + 1]

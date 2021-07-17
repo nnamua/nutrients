@@ -12,20 +12,20 @@ import com.paulaumann.nutrients.viewmodel.PlanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.main_activity)
 
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-        val planViewModel: PlanViewModel by viewModels()
-        val dbViewModel: DBViewerViewModel by viewModels()
+        //val planViewModel: PlanViewModel by viewModels()
+        //val dbViewModel: DBViewerViewModel by viewModels()
     }
 }

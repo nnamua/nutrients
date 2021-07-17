@@ -1,5 +1,6 @@
 package com.paulaumann.nutrients.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,7 +20,7 @@ class PlanViewModel @Inject constructor(
     private val consumedRepository: ConsumedRepository
 ) : ViewModel() {
 
-    var selectedDay:  Int = 0
+    var selectedDay: Int = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
     var week: Int
     var year: Int
 
@@ -33,7 +34,8 @@ class PlanViewModel @Inject constructor(
 
         // Initialize consumed food
         for (i in 0..6) {
-            val timerange = toTimeRange(i + 1, week, year)
+            val day = WeekListAdapter.indexToDay(i)
+            val timerange = toTimeRange(day, week, year)
             viewModelScope.launch {
                 foodRepository.getConsumedFood(timerange.first, timerange.second).collect {
                     consumedFood[i].postValue(it)
@@ -66,7 +68,7 @@ class PlanViewModel @Inject constructor(
             firstDayOfWeek = Calendar.MONDAY
             set(Calendar.YEAR, year)
             set(Calendar.WEEK_OF_YEAR, week)
-            set(Calendar.DAY_OF_WEEK, WeekListAdapter.indexToDay(selectedDay))
+            set(Calendar.DAY_OF_WEEK, selectedDay)
         }.time
         val consumed = Consumed(food.id, date, amount)
         addConsumed(consumed)
@@ -78,7 +80,8 @@ class PlanViewModel @Inject constructor(
 
         // Update live data
         for (i in 0..6) {
-            val timerange = toTimeRange(i + 1, week, year)
+            val day = WeekListAdapter.indexToDay(i)
+            val timerange = toTimeRange(day, week, year)
             viewModelScope.launch {
                 foodRepository.getConsumedFood(timerange.first, timerange.second).collect {
                     consumedFood[i].postValue(it)

@@ -102,6 +102,7 @@ class UnaryBottomSheet(private val food: Food,
         button.setOnClickListener {
             val foodAmount = amountInput.text.toString().toDouble()
             callback(food, foodAmount)
+            dismiss()
         }
         return view
     }

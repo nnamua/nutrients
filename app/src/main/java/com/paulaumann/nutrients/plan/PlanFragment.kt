@@ -1,6 +1,7 @@
 package com.paulaumann.nutrients.plan
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +38,11 @@ class PlanFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set calendar week textview
-        binding.planCalWeek.text = sharedViewModel.week.toString()
+        binding.planCalWeek.text = "Kalenderwoche ${sharedViewModel.week}"
 
         // Initialize listview
-        listAdapter = WeekListAdapter(activity as MainActivity)
+        val selectedIndex = WeekListAdapter.dayToIndex(sharedViewModel.selectedDay)
+        listAdapter = WeekListAdapter(activity as MainActivity, selectedIndex)
         binding.planExpListView.setAdapter(listAdapter)
         binding.planExpListView.setOnChildClickListener { _, _, gpos, cpos, _ ->
             val child = listAdapter.getChild(gpos, cpos)
@@ -53,13 +55,20 @@ class PlanFragment : BaseFragment() {
             }
             return@setOnChildClickListener true
         }
-        binding.planExpListView.setOnGroupExpandListener { pos -> sharedViewModel.selectedDay = pos }
-        binding.planExpListView.setOnGroupCollapseListener { sharedViewModel.selectedDay = -1 }
+        binding.planExpListView.setOnGroupClickListener { _, _, gpos, _ ->
+            val day = WeekListAdapter.indexToDay(gpos)
+            sharedViewModel.selectedDay = day
+            listAdapter.selectedIndex = gpos
+            return@setOnGroupClickListener false
+        }
+
 
         // Automatically update list when the data updates
         for (i in 0..6) {
             sharedViewModel.consumedFood[i].observe(viewLifecycleOwner) { consumedFood ->
                 listAdapter.entries[i] = consumedFood
+                listAdapter.notifyDataSetInvalidated()
+                listAdapter.notifyDataSetChanged()
             }
         }
 
@@ -72,15 +81,15 @@ class PlanFragment : BaseFragment() {
         binding.planBack.setOnClickListener {
             navController.popBackStack()
         }
-        binding.planCalWeek.setOnClickListener {
-            WeekPicker(sharedViewModel::weekSelected, sharedViewModel.week, sharedViewModel.year).apply {
+        binding.planSelectWeek.setOnClickListener {
+            val callback: (Int, Int) -> Unit = { w, y -> sharedViewModel.weekSelected(w,y)
+                                                         binding.planCalWeek.text = "Kalenderwoche ${w}"   }
+            WeekPicker(callback, sharedViewModel.week, sharedViewModel.year).apply {
                 show(mainActivity.supportFragmentManager, tag)
             }
         }
 
     }
-
-    // TODO: Register return entry from PlanEntryFragment
 
     override fun onDestroyView() {
         super.onDestroyView()

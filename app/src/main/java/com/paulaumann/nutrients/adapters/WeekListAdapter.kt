@@ -1,6 +1,7 @@
 package com.paulaumann.nutrients.adapters
 
 import android.animation.ObjectAnimator
+import android.database.DataSetObserver
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,8 @@ import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.data.ConsumedFood
 import java.util.*
 
-class WeekListAdapter(private val activity: MainActivity
+class WeekListAdapter(private val activity: MainActivity,
+                      var selectedIndex: Int
 ) : BaseExpandableListAdapter() {
 
     /*
@@ -36,22 +38,16 @@ class WeekListAdapter(private val activity: MainActivity
         fun dayToIndex(day: Int): Int { return (day + 5) % 7 }
         fun indexToDay(index: Int): Int { return index + 2}
 
-        private fun getDayOfWeek(): Int {
-            return Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        }
-
     }
 
     // List mapping each day to a list of plan entries
     var entries: MutableList<List<ConsumedFood>> = MutableList(7){ listOf() }
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyDataSetInvalidated()
         }
-    // TODO: Maybe update this in listener of PlanFragment
-    var selectedIndex = dayToIndex(getDayOfWeek())
 
-    override fun getGroup(groupPosition: Int): List<ConsumedFood>? {
+    override fun getGroup(groupPosition: Int): List<ConsumedFood> {
         return entries[groupPosition]
     }
 
@@ -143,15 +139,5 @@ class WeekListAdapter(private val activity: MainActivity
 
     override fun getGroupCount(): Int {
         return entries.size
-    }
-
-    override fun onGroupExpanded(groupPosition: Int) {
-        super.onGroupExpanded(groupPosition)
-        selectedIndex = groupPosition
-    }
-
-    override fun onGroupCollapsed(groupPosition: Int) {
-        super.onGroupCollapsed(groupPosition)
-        selectedIndex = groupPosition
     }
 }

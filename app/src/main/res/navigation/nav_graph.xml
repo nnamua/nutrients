@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_nutrientsFragment"
             app:destination="@id/nutrientsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/planFragment"
@@ -45,6 +48,9 @@
         <action
             android:id="@+id/action_DBViewerFragment_to_foodDetailFragment"
             app:destination="@id/foodDetailFragment" />
+        <action
+            android:id="@+id/action_DBViewerFragment_to_DBAddEntryFragment"
+            app:destination="@id/DBAddEntryFragment" />
     </fragment>
     <fragment
         android:id="@+id/foodDetailFragment"
@@ -65,6 +71,16 @@
         android:name="com.paulaumann.nutrients.nutrients.NutrientsFragment"
         android:label="NutrientsFragment"
         tools:layout="@layout/fragment_nutrients"/>
+    <fragment
+        android:id="@+id/DBAddEntryFragment"
+        android:name="com.paulaumann.nutrients.dbviewer.DBAddEntryFragment"
+        android:label="DBAddEntryFragment"
+        tools:layout="@layout/fragment_dbviewer_add"/>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.paulaumann.nutrients.history.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history"/>
 
 
 </navigation>

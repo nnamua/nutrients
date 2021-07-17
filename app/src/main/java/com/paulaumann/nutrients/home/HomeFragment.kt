@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment() {
         }
         binding.mainHistory.setOnClickListener {
             // Launch HistoryFragment
-            navController.navigate(R.id.action_homeFragment_to_todoFragment)
+            navController.navigate(R.id.action_homeFragment_to_historyFragment)
         }
 
         // Set sample data to indicators

@@ -62,7 +62,7 @@ class DBViewerFragment : BaseFragment() {
             navController.popBackStack()
         }
         binding.dbAdd.setOnClickListener {
-            // TODO: Navigate to DBAddFragment
+            navController.navigate(R.id.action_DBViewerFragment_to_DBAddEntryFragment)
         }
     }
 

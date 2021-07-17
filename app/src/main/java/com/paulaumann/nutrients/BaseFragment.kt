@@ -11,4 +11,8 @@ abstract class BaseFragment : Fragment(){
     protected val appDatabase: AppDatabase
         get() = AppDatabase.getInstance(requireActivity())
 
+    protected val navController by lazy {
+        (activity as MainActivity).navController
+    }
+
 }

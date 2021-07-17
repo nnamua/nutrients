@@ -12,7 +12,9 @@ import com.paulaumann.nutrients.databinding.FragmentNutrientsBinding
 import com.paulaumann.nutrients.analytics.Analytics
 import com.paulaumann.nutrients.util.WeekPicker
 import com.paulaumann.nutrients.viewmodel.NutrientsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NutrientsFragment : BaseFragment() {
 
     private var _binding: FragmentNutrientsBinding? = null
@@ -52,7 +54,7 @@ class NutrientsFragment : BaseFragment() {
 
         // Set listener to navigation buttons
         binding.nutrientsBack.setOnClickListener {
-            // TODO: Navigate back
+            navController.popBackStack()
         }
     }
 

@@ -15,7 +15,9 @@ import com.paulaumann.nutrients.databinding.FragmentPlanNewentryBinding
 import com.paulaumann.nutrients.data.Food
 import com.paulaumann.nutrients.viewmodel.PlanNewEntryViewModel
 import com.paulaumann.nutrients.viewmodel.PlanViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlanNewEntryFragment : BaseFragment() {
 
     private var _binding: FragmentPlanNewentryBinding? = null
@@ -59,13 +61,15 @@ class PlanNewEntryFragment : BaseFragment() {
 
         // Set listener for navigation button
         binding.newEntryBackButton.setOnClickListener {
-            // TODO: Navigate back to PlanFragment
+            navController.popBackStack()
         }
     }
 
     // Called when an item of the entries list is pressed
     private fun listItemClicked(food: Food){
-        UnaryBottomSheet(food, sharedViewModel::addConsumed).apply {
+        val callback: (Food, Double) -> Unit = { f, a -> sharedViewModel.addConsumed(f, a)
+                                                         navController.popBackStack() }
+        UnaryBottomSheet(food, callback).apply {
             show(mainActivity.supportFragmentManager, tag)
         }
     }

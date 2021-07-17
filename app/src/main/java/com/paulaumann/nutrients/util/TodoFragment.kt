@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.paulaumann.nutrients.BaseFragment
 import com.paulaumann.nutrients.databinding.FragmentTodoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TodoFragment : BaseFragment() {
 
     private var _binding: FragmentTodoBinding? = null
@@ -16,7 +18,7 @@ class TodoFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTodoBinding.inflate(inflater, container, false)
         return binding.root
     }

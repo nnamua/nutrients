@@ -11,13 +11,60 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
+            android:id="@+id/action_homeFragment_to_planFragment"
+            app:destination="@id/planFragment" />
+        <action
             android:id="@+id/action_homeFragment_to_todoFragment"
             app:destination="@id/todoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_DBViewerFragment"
+            app:destination="@id/DBViewerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_nutrientsFragment"
+            app:destination="@id/nutrientsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.paulaumann.nutrients.plan.PlanFragment"
+        android:label="PlanFragment"
+        tools:layout="@layout/fragment_plan">
+        <action
+            android:id="@+id/action_planFragment_to_planNewEntryFragment"
+            app:destination="@id/planNewEntryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planNewEntryFragment"
+        android:name="com.paulaumann.nutrients.plan.PlanNewEntryFragment"
+        android:label="PlanNewEntryFragment"
+        tools:layout="@layout/fragment_plan_newentry"/>
+    <fragment
+        android:id="@+id/DBViewerFragment"
+        android:name="com.paulaumann.nutrients.dbviewer.DBViewerFragment"
+        android:label="DBViewerFragment"
+        tools:layout="@layout/fragment_dbviewer">
+        <action
+            android:id="@+id/action_DBViewerFragment_to_foodDetailFragment"
+            app:destination="@id/foodDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodDetailFragment"
+        android:name="com.paulaumann.nutrients.util.FoodDetailFragment"
+        android:label="FoodDetailFragment"
+        tools:layout="@layout/fragment_food_detail">
+        <argument
+            android:name="foodId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/todoFragment"
         android:name="com.paulaumann.nutrients.util.TodoFragment"
         android:label="TodoFragment"
         tools:layout="@layout/fragment_todo"/>
+    <fragment
+        android:id="@+id/nutrientsFragment"
+        android:name="com.paulaumann.nutrients.nutrients.NutrientsFragment"
+        android:label="NutrientsFragment"
+        tools:layout="@layout/fragment_nutrients"/>
+
 
 </navigation>

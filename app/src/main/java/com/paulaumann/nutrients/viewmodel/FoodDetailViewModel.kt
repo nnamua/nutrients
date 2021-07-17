@@ -8,18 +8,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FoodDetailViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
-    foodRepository: FoodRepository
+    private val foodRepository: FoodRepository
 ) : ViewModel() {
 
-    val food: LiveData<Food?>
+    var food: LiveData<Food?> = MutableLiveData()
 
-    init {
-        val foodId: Int = savedStateHandle.get<Int>(FOOD_ID_KEY)!!
-        food = foodRepository.getFoodById(foodId).asLiveData()
-    }
-
-    companion object {
-        const val FOOD_ID_KEY = "foodId"
+    fun loadFood(id: Int){
+        food = foodRepository.getFoodById(id).asLiveData()
     }
 }

@@ -77,9 +77,9 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
-        android:name="com.paulaumann.nutrients.dbviewer.DBAliasFragment"
+        android:name="com.paulaumann.nutrients.util.TodoFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

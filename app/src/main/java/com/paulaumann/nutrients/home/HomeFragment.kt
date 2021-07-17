@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.paulaumann.nutrients.BaseFragment
 import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -17,7 +20,7 @@ class HomeFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,18 +30,23 @@ class HomeFragment : BaseFragment() {
 
         binding.mainThisWeek.setOnClickListener {
             // Launch PlanFragment
+            navController.navigate(R.id.action_homeFragment_to_planFragment)
         }
         binding.mainDBViewer.setOnClickListener {
             // Launch DBViewerFragment
+            navController.navigate(R.id.action_homeFragment_to_DBViewerFragment)
         }
         binding.mainProfile.setOnClickListener {
             // Launch ProfileFragment
+            navController.navigate(R.id.action_homeFragment_to_todoFragment)
         }
         binding.mainNutrients.setOnClickListener {
             // Launch NutrientsFragment
+            navController.navigate(R.id.action_homeFragment_to_nutrientsFragment)
         }
         binding.mainHistory.setOnClickListener {
             // Launch HistoryFragment
+            navController.navigate(R.id.action_homeFragment_to_todoFragment)
         }
 
         // Set sample data to indicators

@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulaumann.nutrients.BaseFragment
+import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.adapters.FoodListAdapter
 import com.paulaumann.nutrients.databinding.FragmentDbviewerBinding
 import com.paulaumann.nutrients.data.Food
 import com.paulaumann.nutrients.viewmodel.DBViewerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DBViewerFragment : BaseFragment() {
 
     private var _binding: FragmentDbviewerBinding? = null
@@ -56,7 +59,7 @@ class DBViewerFragment : BaseFragment() {
 
         // Set listeners to navigation buttons
         binding.dbBack.setOnClickListener {
-            // TODO: Navigate back
+            navController.popBackStack()
         }
         binding.dbAdd.setOnClickListener {
             // TODO: Navigate to DBAddFragment
@@ -64,7 +67,8 @@ class DBViewerFragment : BaseFragment() {
     }
 
     private fun listItemClicked(food: Food){
-        // TODO: Navigate to FoodDetailFragment
+        val action = DBViewerFragmentDirections.actionDBViewerFragmentToFoodDetailFragment(food.id)
+        navController.navigate(action)
     }
 
     override fun onDestroyView() {

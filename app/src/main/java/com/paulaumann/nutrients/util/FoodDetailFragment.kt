@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulaumann.nutrients.BaseFragment
 import com.paulaumann.nutrients.adapters.FoodDataListAdapter
 import com.paulaumann.nutrients.databinding.FragmentFoodDetailBinding
 import com.paulaumann.nutrients.viewmodel.FoodDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FoodDetailFragment : BaseFragment() {
 
     private var _binding: FragmentFoodDetailBinding? = null
@@ -22,7 +25,7 @@ class FoodDetailFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFoodDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -33,6 +36,9 @@ class FoodDetailFragment : BaseFragment() {
         val adapter = FoodDataListAdapter(mainActivity)
         binding.foodDataList.adapter = adapter
         binding.foodDataList.layoutManager = LinearLayoutManager(mainActivity)
+
+        val safeArgs: FoodDetailFragmentArgs by navArgs()
+        viewModel.loadFood(safeArgs.foodId)
 
         // Automatically change textview content when data changes
         viewModel.food.observe(viewLifecycleOwner) { food ->
@@ -45,7 +51,7 @@ class FoodDetailFragment : BaseFragment() {
 
         // Set listeners to navigation buttons
         binding.foodBackButton.setOnClickListener {
-            // TODO: Navigate back
+            navController.popBackStack()
         }
     }
 

@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.paulaumann.nutrients.BaseFragment
 import com.paulaumann.nutrients.MainActivity
+import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.adapters.WeekListAdapter
 import com.paulaumann.nutrients.databinding.FragmentPlanBinding
 import com.paulaumann.nutrients.util.WeekPicker
 import com.paulaumann.nutrients.viewmodel.PlanViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlanFragment : BaseFragment() {
 
     private var _binding: FragmentPlanBinding? = null
@@ -25,7 +28,7 @@ class PlanFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPlanBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -62,12 +65,12 @@ class PlanFragment : BaseFragment() {
 
         // Set onclick listener for new entry button
         binding.planNewEntry.setOnClickListener {
-            // TODO: Start PlanNewEntryFragment
+            navController.navigate(R.id.action_planFragment_to_planNewEntryFragment)
         }
 
         // Set onclick listeners for navigation buttons
         binding.planBack.setOnClickListener {
-            // TODO: Return to previous fragment
+            navController.popBackStack()
         }
         binding.planCalWeek.setOnClickListener {
             WeekPicker(sharedViewModel::weekSelected, sharedViewModel.week, sharedViewModel.year).apply {

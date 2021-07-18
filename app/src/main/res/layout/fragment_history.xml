@@ -11,7 +11,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="10dp"
@@ -48,25 +48,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/varela_round"
         android:text="Analyse"
         android:textColor="@color/darkTone"
         android:textSize="35sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="25dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="Wöchentliche Analyse der Nährstoffwerte."
-        android:textAlignment="center"
-        android:textColor="@color/standardTone" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/historyTabLayout"

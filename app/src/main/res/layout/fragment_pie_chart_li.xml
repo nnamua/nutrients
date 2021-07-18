@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:paddingLeft="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/pieChartFoodAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/varela_round"
+            android:text="100mg"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/pieChartFoodDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/pieChartFoodAmount"
+            android:ellipsize="end"
+            android:fontFamily="@font/varela_round"
+            android:maxLines="1"
+            android:text="Am dd.mm.yyyy"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

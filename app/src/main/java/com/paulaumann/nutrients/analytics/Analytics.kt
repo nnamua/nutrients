@@ -10,14 +10,17 @@ open class Analytics() {
         // Calculates the average food nutrients consumed this week
         fun average(entries: List<ConsumedFood>): Food {
             val av = Food.empty()
-            if (entries.size == 0) return av
+            if (entries.isEmpty()) return av
             for (i in 4 until Food.keys.size) {
                 val key = Food.keys[i]
                 var valueSum = 0.0
                 var numOfValues = 0
                 for (entry in entries) {
                     val food = entry.food
-                    food[key]?.let { valueSum += (it as Number).toDouble(); numOfValues++ }
+                    val foodValue = (food[key] as Number?)?.toDouble() ?: continue
+                    val foodMultiplier = entry.consumed.amount / food.getReferenceAmount()
+                    valueSum += foodValue * foodMultiplier
+                    numOfValues++
                 }
                 av[key] = valueSum / numOfValues
             }
@@ -27,13 +30,15 @@ open class Analytics() {
         // Calculates the summed food nutrients consumed this week
         fun sum(entries: List<ConsumedFood>): Food {
             val sum = Food.empty()
-            if (entries.size == 0) return sum
+            if (entries.isEmpty()) return sum
             for (i in 4 until Food.keys.size) {
                 val key = Food.keys[i]
                 var valueSum = 0.0
                 for (entry in entries) {
                     val food = entry.food
-                    food[key]?.let { valueSum += (it as Number).toDouble() }
+                    val foodValue = (food[key] as Number?)?.toDouble() ?: continue
+                    val foodMultiplier = entry.consumed.amount / food.getReferenceAmount()
+                    valueSum += foodValue * foodMultiplier
                 }
                 sum[key] = valueSum
             }

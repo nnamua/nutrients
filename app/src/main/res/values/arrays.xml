@@ -43,4 +43,39 @@
         <item>Zink (Zn)  (mg)</item>
         <item>Selen (Se) (µg)</item>
     </string-array>
+
+    <string-array name="material_colors">
+        <item>#f44336</item>.
+        <item>#e91e63</item>
+        <item>#9c27b0</item>
+        <item>#673ab7</item>.
+        <item>#3f51b5</item>
+        <item>#2196f3</item>
+        <item>#03a9f4</item>.
+        <item>#00bcd4</item>
+        <item>#009688</item>
+        <item>#4caf50</item>.
+        <item>#8bc34a</item>
+        <item>#cddc39</item>
+        <item>#ffeb3b</item>.
+        <item>#ffc107</item>
+        <item>#ff9800</item>
+        <item>#ff5722</item>.
+        <item>#b71c1c</item>
+        <item>#880e4f</item>
+        <item>#4a148c</item>.
+        <item>#311b92</item>
+        <item>#1a237e</item>
+        <item>#0d47a1</item>.
+        <item>#01579b</item>
+        <item>#006064</item>
+        <item>#004d40</item>.
+        <item>#1b5e20</item>
+        <item>#33691e</item>
+        <item>#827717</item>.
+        <item>#f57f17</item>
+        <item>#ff6f00</item>
+        <item>#e65100</item>.
+        <item>#bf360c</item>
+    </string-array>
 </resources>

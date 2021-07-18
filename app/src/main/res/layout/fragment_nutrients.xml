@@ -64,13 +64,14 @@
         android:layout_marginBottom="25dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="Wöchentliche Analyse der Nährstoffwerte."
+        android:text="Summierte wöchentliche Nährstoffwerte"
         android:textAlignment="center"
         android:textColor="@color/standardTone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sumFoodData"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:padding="5dp" />
 
 </LinearLayout>

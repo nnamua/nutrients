@@ -1,7 +1,6 @@
 package com.paulaumann.nutrients.adapters
 
 import android.animation.ObjectAnimator
-import android.database.DataSetObserver
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -70,7 +69,7 @@ class WeekListAdapter(private val activity: MainActivity,
         var view = convertView
         if (view == null){
             val layoutInflater = LayoutInflater.from(parent?.context)
-            view = layoutInflater.inflate(R.layout.plan_lg, parent, false)!!
+            view = layoutInflater.inflate(R.layout.plan_gi, parent, false)!!
         }
         val textView = view.findViewById<TextView>(R.id.planListGroupTitle)
         textView.text = day

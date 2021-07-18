@@ -1,28 +1,23 @@
 package com.paulaumann.nutrients.views
 
 import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.graphics.Paint.ANTI_ALIAS_FLAG
-import android.icu.util.Measure
 import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.animation.AnimationSet
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.withTranslation
-import androidx.core.util.rangeTo
+import androidx.core.view.ViewCompat
 import com.paulaumann.nutrients.R
-import com.paulaumann.nutrients.data.ConsumedFood
-import java.lang.Double.max
 import kotlin.math.ceil
-import kotlin.properties.Delegates
+import kotlin.math.max
 
 class StackBarChart : View {
 
@@ -37,11 +32,8 @@ class StackBarChart : View {
     private var total = 0.0
     private var selected: Int = -1
 
-    private val paddingCenter = 10.0
-    private val relRectPadding = 0.02
-    private val selectedScale = 0.8
-
-    private var heightMode: Int = MeasureSpec.UNSPECIFIED
+    private val paddingCenter = 10
+    private val selectedScale = 1.2
 
     private var varelaRound = ResourcesCompat.getFont(context, R.font.varela_round)
     private val rectPaint = Paint(ANTI_ALIAS_FLAG).apply {
@@ -71,43 +63,45 @@ class StackBarChart : View {
         textSize = 50f
     }
 
-    private var selectedExtraLabel: Pair<StaticLayout, PointF>? = null
-
     private fun _add(pair: Pair<String, Double>){
         values.add(pair)
         total += pair.second
         val layout = StaticLayout.Builder
-            .obtain(pair.first, 0, pair.first.length, labelPaint, (paddingLeft + width / 2))
+            .obtain(pair.first, 0, pair.first.length, labelPaint,
+                (paddingCenter + width) / 2 - paddingRight)
             .build()
         layouts.add(layout)
+    }
+
+    private fun update(){
+        if (ViewCompat.isLaidOut(this)) {
+            requestLayout()
+            invalidate()
+        }
     }
 
     fun add(label: String, value: Double){
         if (value < 0.001) return
         _add(Pair(label, value))
-        recalculate()
-        invalidate()
+        update()
     }
 
     fun add(list: List<Pair<String, Double>>){
         for (pair in list){
-            if (pair.second < 0.001) return
+            if (pair.second < 0.001) continue
             _add(pair)
         }
-        recalculate()
-        invalidate()
+        update()
     }
 
     fun clear(){
         values.clear()
         layouts.clear()
         total = 0.0
-        recalculate()
-        invalidate()
+        update()
     }
 
     fun select(i: Int){
-        val previous = selected
         selected = i
 
         /* Animate selected:
@@ -162,30 +156,37 @@ class StackBarChart : View {
 
         }
 
-        onSizeChanged(width, height, width, height)
+        recalculate()
         invalidate()
     }
 
-    // In an optimal case, this view is running with layout_height set to wrap_content.
-    // Only here it is guaranteed, that every label fits onto the screen.
-    // To guarantee this, final rectangle heights are calculated in the following way:
-    // First, the text height and rectangle height is calculated for every entry
-    // (Here, rectangle height means entry value divided by total value, or share of total height).
-    // By dividing text height by rectangle height, we can calculate by how much
-    // the rectangle would need to be scaled to match the text.
-    // We only store the maximum value of these factors (the smallest rectangle compared to its text)
-    // Now we can iterate over our entries again, this time multiplying the
-    // rectangle height with our maximum factor. This way, we guarantee that:
-    // (1) Rectangles share the same ratios as without scaling
-    // (2) Every rectangle is as least as big as the corresponding text
+    /*
+    In an optimal case, this view is running with layout_height set to wrap_content.
+    Only here it is guaranteed, that every label fits onto the screen.
+    To guarantee this, final rectangle heights are calculated in the following way:
+    First, the text height and rectangle height is calculated for every entry
+    (Here, rectangle height means entry value divided by total value, or share of total height).
+    By dividing text height by rectangle height, we can calculate by how much
+    the rectangle would need to be scaled to match the text.
+    We only store the maximum value of these factors (the smallest rectangle compared to its text)
+    Now we can iterate over our entries again, this time multiplying the
+    rectangle height with our maximum factor. This way, we guarantee that:
+    (1) Rectangles share the same ratios as without scaling
+    (2) Every rectangle is as least as big as the corresponding text
+    */
 
-    private fun recalculateWithWrapContent(){
+    private fun calculateHeight(w: Int): Int{
         val rectPadding = 10f
-        // |  <->   RECT  <->   TEXT  <-> |
-        //   pLeft      pCenter      pRight
-        val rectWidth = (width - paddingLeft - paddingCenter - paddingRight) / (2 * selectedScale)
-        val barOffset = rectWidth / 2 * (selectedScale - 1)
 
+        // Calculate layouts
+        layouts.clear()
+        for (pair in values){
+            val layout = StaticLayout.Builder
+                .obtain(pair.first, 0, pair.first.length, labelPaint,
+                    (paddingCenter + w) / 2 - paddingRight)
+                .build()
+            layouts.add(layout)
+        }
 
         // Calculate maxScale
         var maxScale: Double = 1.0
@@ -199,14 +200,30 @@ class StackBarChart : View {
         }
 
         // Calculate rectangles and layout placements
+        var newHeight = max(0, values.size - 1) * rectPadding.toDouble()
+        for (i in values.indices){
+            newHeight += rectShares[i] * maxScale
+        }
+
+        return ceil(newHeight).toInt()
+    }
+
+    private fun recalculate(){
+        val rectPadding = 10f
+        // |  <->   RECT  <->   TEXT  <-> |
+        //   pLeft      pCenter      pRight
+        val rectWidth = (width - paddingLeft - paddingCenter - paddingRight) / (2 * selectedScale)
+        val barOffset = rectWidth / 2f * (selectedScale - 1)
+        val totalHeight = height - (paddingTop + paddingBottom) - (values.size - 1) * rectPadding
+
+        // Calculate rectangles and layout placements
         rectangles.clear()
         layoutPlacements.clear()
-        var yOffset: Float = paddingTop.toFloat()
+        var yOffset = paddingTop.toFloat()
         for (i in values.indices){
             // Rectangle
-            val rectHeight = rectShares[i] * maxScale
+            val rectHeight = (values[i].second / total) * totalHeight
             val isSelected = (i == selected)
-            Log.d("StackBarChart", "$i $isSelected")
             val left   = if (isSelected) paddingLeft.toFloat() else (paddingLeft + barOffset).toFloat()
             val top    = yOffset
             val right  = if (isSelected) (width - paddingCenter) / 2 else (width - paddingCenter) / 2 - barOffset
@@ -222,44 +239,23 @@ class StackBarChart : View {
 
             yOffset += rectHeight.toFloat() + rectPadding
         }
-
-        // Set height so that the entire chart fits into the view
-        Log.d("StackBarChart", "Using a height of $yOffset.")
-        layoutParams.height = ceil(yOffset).toInt()
-        setLayoutParams(layoutParams)
-
-    }
-
-    private fun recalculate(){
-        if (heightMode == MeasureSpec.UNSPECIFIED) {
-            recalculateWithWrapContent()
-        }
-        // TODO: Recalculation for other MeasureSpec modes
-        // Because onMeasure is called with EXACT after the height is set
-        // by recalculateWithWrapContent(), I will just use the previously
-        // calculated placements and rectangles
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        heightMode = MeasureSpec.getMode(heightMeasureSpec)
-        Log.d("StackBarChart", "Received mode ${MeasureSpec.getMode(heightMeasureSpec)}")
-        Log.d("StackBarChart", "Received size ${MeasureSpec.getSize(heightMeasureSpec)}")
-
-        /*
-            If the mode is UNSPECIFIED (-> wrap_content) return 0,
-            and enlarge the view as necessary.
-         */
-
-        if (heightMode == MeasureSpec.UNSPECIFIED) {
-            setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), 0)
+        val width = MeasureSpec.getSize(widthMeasureSpec)
+        if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.UNSPECIFIED){
+            // Calculate fitting height for wrap_content
+            val height = calculateHeight(width)
+            setMeasuredDimension(width, height)
         } else {
-            setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
+            val height = MeasureSpec.getSize(heightMeasureSpec)
+            setMeasuredDimension(width, height)
         }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
         recalculate()
+        super.onSizeChanged(w, h, oldw, oldh)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -290,16 +286,13 @@ class StackBarChart : View {
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event?.action == MotionEvent.ACTION_DOWN) {
-            var newSelection = false
             for (i in 0 until rectangles.size){
                 val rect = rectangles[i]
                 if (rect.contains(event.x, event.y)){
-                    select(i)
-                    newSelection = true
+                    if (selected == i) select(-1) else select(i)
                     break
                 }
             }
-            if (!newSelection) select(-1)
         }
 
         return super.onTouchEvent(event)

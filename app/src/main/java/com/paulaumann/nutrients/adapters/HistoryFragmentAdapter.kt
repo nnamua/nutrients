@@ -9,6 +9,7 @@ import com.paulaumann.nutrients.data.Consumed
 import com.paulaumann.nutrients.data.ConsumedFood
 import com.paulaumann.nutrients.history.StackBarFragment
 import com.paulaumann.nutrients.data.Food
+import com.paulaumann.nutrients.history.PieChartFragment
 import java.util.*
 
 class HistoryFragmentAdapter(private val itemcount: Int,
@@ -17,9 +18,11 @@ class HistoryFragmentAdapter(private val itemcount: Int,
                              private val entries: LiveData<List<ConsumedFood>>
 ) : FragmentStateAdapter(fm, lifecycle) {
 
+    private val colorMapping = mutableMapOf<Int, Int>()
+
     override fun getItemCount(): Int = itemcount
 
     override fun createFragment(position: Int): Fragment {
-        return StackBarFragment(position, entries)
+        return PieChartFragment(position, entries, colorMapping)
     }
 }

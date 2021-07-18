@@ -15,6 +15,11 @@ import com.paulaumann.nutrients.util.WeekPicker
 import com.paulaumann.nutrients.viewmodel.PlanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment allows the user to view plan entries (Consumed) for a given week.
+ * Furthermore, these entries can also be edited, deleted, or new ones created.
+ */
+
 @AndroidEntryPoint
 class PlanFragment : BaseFragment() {
 

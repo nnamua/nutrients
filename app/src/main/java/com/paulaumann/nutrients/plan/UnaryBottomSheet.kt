@@ -17,6 +17,12 @@ import java.lang.NumberFormatException
 import kotlin.math.log10
 import kotlin.math.pow
 
+/**
+ * This BottomSheet is used to specify a plan entry after selecting a Food object from the list.
+ * @param food Selected food
+ * @param callback This function is called when the user clicks on confirm. The first parameter is the selected Food, the second the selected amount.
+ */
+
 class UnaryBottomSheet(private val food: Food,
                        private val callback: (Food, Double) -> Unit
 ) : BottomSheetDialogFragment() {

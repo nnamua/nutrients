@@ -10,6 +10,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel for the PlanNewEntryFragment
+ */
+
 @HiltViewModel
 class PlanNewEntryViewModel @Inject constructor(
     private val foodRepository: FoodRepository

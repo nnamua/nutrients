@@ -17,6 +17,12 @@ import com.paulaumann.nutrients.viewmodel.PlanNewEntryViewModel
 import com.paulaumann.nutrients.viewmodel.PlanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This fragment allows the user to choose a Food object from the database, and create
+ * a new plan entry (Consumed) with a certain amount.
+ * @see FoodListAdapter
+ */
+
 @AndroidEntryPoint
 class PlanNewEntryFragment : BaseFragment() {
 

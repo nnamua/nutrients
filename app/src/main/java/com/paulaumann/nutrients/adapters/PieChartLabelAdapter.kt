@@ -1,7 +1,6 @@
 package com.paulaumann.nutrients.adapters
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,18 @@ import android.widget.BaseExpandableListAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import com.paulaumann.nutrients.MainActivity
 import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.data.ConsumedFood
 import com.paulaumann.nutrients.databinding.FragmentPieChartGiBinding
 import com.paulaumann.nutrients.databinding.FragmentPieChartLiBinding
 import java.text.DateFormat
 
+/**
+ * This class is the adapter for an ExpandableListView containing
+ * additional information about PieChart data.
+ * @param activity Used for fetching drawables
+ * @param colorMapping Shared color mapping with pie chart
+ */
 class PieChartLabelAdapter(
     private val activity: AppCompatActivity,
     private val colorMapping: MutableMap<Int, Int>
@@ -72,6 +76,7 @@ class PieChartLabelAdapter(
             binding = FragmentPieChartGiBinding.bind(view)
         }
 
+        // Retrieve the color from the mapping and set tint for the drawable.
         val color = colorMapping[firstChild.consumed.foodId] ?: Color.BLACK
         val unwrappedDrawable = ContextCompat.getDrawable(activity, R.drawable.rounded_rect)
         if (unwrappedDrawable != null) {

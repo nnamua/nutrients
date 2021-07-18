@@ -14,6 +14,12 @@ import com.paulaumann.nutrients.util.WeekPicker
 import com.paulaumann.nutrients.viewmodel.HistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment allows the user to view analysis for a specified week.
+ * The data is displayed using pie charts, so that the user can see what
+ * consumed food caused which effect on a certain nutrient.
+ */
+
 @AndroidEntryPoint
 class HistoryFragment : BaseFragment() {
 

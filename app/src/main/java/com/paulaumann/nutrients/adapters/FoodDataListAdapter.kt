@@ -10,6 +10,13 @@ import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.data.Food
 import kotlin.math.abs
 
+/**
+ * This class is the adapter for a RecyclerView containing
+ * detailed data about a Food object.
+ * @param context Context, required for fetching resources
+ * @see Food
+ * @see RecyclerView
+ */
 class FoodDataListAdapter(context: Context) :
     RecyclerView.Adapter<FoodDataListAdapter.ViewHolder>() {
 
@@ -19,6 +26,9 @@ class FoodDataListAdapter(context: Context) :
         notifyDataSetChanged()
     }
 
+    /*
+        Labels for the different food data fields
+     */
     private val labels: Array<String> = context.resources.getStringArray(R.array.food_data_labels)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,8 +52,8 @@ class FoodDataListAdapter(context: Context) :
             holder.value.text = "k.A."
         } else {
             if (value is Double?){
-                if (abs(value % 1) < 0.0000001) value = value.toInt()
-                else value = String.format("%.2f", value)
+                value = if (abs(value % 1) < 0.0000001) value.toInt()
+                else String.format("%.2f", value)
             }
             holder.value.text = value.toString()
         }

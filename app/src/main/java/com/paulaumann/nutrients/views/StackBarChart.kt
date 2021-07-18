@@ -19,6 +19,10 @@ import com.paulaumann.nutrients.R
 import kotlin.math.ceil
 import kotlin.math.max
 
+/**
+ * Different chart to display data, deprecated due to bad UX.
+ */
+
 class StackBarChart : View {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)

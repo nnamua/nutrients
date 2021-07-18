@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.paulaumann.nutrients.R
 
 /**
- * A simple [Fragment] subclass.
+ * This Fragment specifically allows the user to add aliases to the database
  */
 class DBAliasFragment : Fragment() {
 

@@ -8,6 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.data.Food
 
+/**
+ * This class is the adapter for a RecyclerView containing
+ * a list of Food objects.
+ * @param listItemClicked This function will be called whenever a list item is clicked
+ * @see Food
+ * @see RecyclerView
+ */
 class FoodListAdapter(private val listItemClicked: (Food) -> Unit) :
         RecyclerView.Adapter<FoodListAdapter.ViewHolder>() {
 
@@ -23,6 +30,7 @@ class FoodListAdapter(private val listItemClicked: (Food) -> Unit) :
     ): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.plan_newentry_li, parent, false)
         val holder = ViewHolder(view)
+        // Bind callback
         view.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 val pos = holder.bindingAdapterPosition

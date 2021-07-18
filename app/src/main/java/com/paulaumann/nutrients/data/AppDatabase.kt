@@ -6,6 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
+/**
+ * Room Database singleton object.
+ * Builds a database (if it doesn't exist) from assets/nutrients.db file
+ */
+
 @Database(entities = [Consumed::class, Food::class], version=1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -18,6 +23,9 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var instance: AppDatabase? = null
 
+        /**
+         * Returns an instance of this singleton class.
+         */
         fun getInstance(
             context: Context
         ): AppDatabase = instance ?: synchronized(this) {

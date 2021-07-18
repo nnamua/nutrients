@@ -63,6 +63,10 @@ fun toTimeRange(weekday: Int, week: Int, year: Int): Pair<Date, Date> {
     return Pair(after, before)
 }
 
+/**
+ * Generates random or preselected colors.
+ * (Preselected colors from Google Materials List)
+ */
 class MaterialColorGenerator {
     companion object {
 

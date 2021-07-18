@@ -7,6 +7,11 @@ import androidx.room.PrimaryKey
 import java.security.KeyException
 import kotlin.math.round
 
+/**
+ * This data class models a food entry in the database.
+ * It stores all relevant data, and provides extra functionality for easier access.
+ */
+
 @Entity(tableName = "food")
 data class Food(
     @PrimaryKey                                     var id: Int,
@@ -75,7 +80,10 @@ data class Food(
             "magnesium", "phosphorus", "iron", "iodine", "zinc", "selenium")
     }
 
-    // Only works when reference string is "<amount><unit>"
+    /**
+     * Extracts the reference unit from the reference string.
+     * Only works when reference string is "<amount><unit>"!
+     */
     fun getReferenceUnit(): String {
         if (!reference.matches(Regex("[0-9]+(kg|L|l|g|ml|mg)"))){
             Log.d("URGENT ERROR", "Reference string does not match regex, returning default 'mg' for '" + reference + "'")
@@ -88,7 +96,10 @@ data class Food(
         return unit
     }
 
-    // Only works when reference string is "<amount><unit>"
+    /**
+     * Extracts the reference value from the reference string.
+     * Only works when reference string is "<amount><unit>"!
+     */
     fun getReferenceAmount(): Double {
         if (!reference.matches(Regex("[0-9]+(kg|L|l|g|ml|mg)"))){
             Log.d("URGENT ERROR", "Reference string does not match regex, returning default '100' for '" + reference + "'")
@@ -101,6 +112,9 @@ data class Food(
         return amount.toDouble()
     }
 
+    /**
+     * Allows for the get operator -> [] to access data fields by key.
+     */
     operator fun get(key: String): Any? {
         return when (key) {
             "id" -> id
@@ -151,6 +165,9 @@ data class Food(
         }
     }
 
+    /**
+     * Allows for the get operator -> [] to access data fields by index.
+     */
     operator fun get(index: Int): Any? {
         return when (index) {
             0 -> id
@@ -201,6 +218,9 @@ data class Food(
         }
     }
 
+    /**
+     * Allows for the set operator -> [] to access data fields by key.
+     */
     operator fun set(key: String, value: Int?){
         when (key) {
             "energy_kJ" -> energy_kJ = value
@@ -247,6 +267,9 @@ data class Food(
         }
     }
 
+    /**
+     * Allows for the set operator -> [] to access data fields by key.
+     */
     operator fun set(key: String, value: Double?){
         when (key) {
             "energy_kJ" -> energy_kJ = value?.let { round(it).toInt() }

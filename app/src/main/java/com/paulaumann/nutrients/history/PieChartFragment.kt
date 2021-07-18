@@ -13,6 +13,15 @@ import com.paulaumann.nutrients.data.ConsumedFood
 import com.paulaumann.nutrients.databinding.FragmentPieChartBinding
 import com.paulaumann.nutrients.util.MaterialColorGenerator
 
+/**
+ * This Fragment displays a Pie Chart containing the shares
+ * of different ConsumedFood entries for a certain data field (nutrient)
+ * @param pos Position in the ViewPager, used to calculate index for Food data field
+ * @param entries LiveData of a List of ConsumedFood
+ * @param colorMapping Map that contains the color mapping for entries
+ * @see PieChartLabelAdapter
+ */
+
 class PieChartFragment(private val pos: Int,
                        private val entries: LiveData<List<ConsumedFood>>,
                        private val colorMapping: MutableMap<Int, Int>
@@ -40,9 +49,12 @@ class PieChartFragment(private val pos: Int,
             updateChart(it)
         }
 
+        // Initialize list
         listAdapter = PieChartLabelAdapter(activity as AppCompatActivity, colorMapping)
         binding.pieChartList.setAdapter(listAdapter)
 
+        // Allow only one group to be expanded at any time
+        // Select the pie chart slice for the expanded group
         binding.pieChartList.setOnGroupExpandListener { pos ->
             for (i in 0 until listAdapter.groupCount){
                 if (i != pos) binding.pieChartList.collapseGroup(i)
@@ -65,6 +77,7 @@ class PieChartFragment(private val pos: Int,
                 val value = consumedFood.food[pos + 4] as Number
                 sum += value.toDouble()
             }
+            // If the value is less than this threshold, ignore it
             if (sum < 0.0001) continue
             val foodId = group[0].consumed.foodId
             groupedEntries[foodId] = group

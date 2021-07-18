@@ -18,6 +18,12 @@ import java.lang.NumberFormatException
 import kotlin.math.log10
 import kotlin.math.pow
 
+/**
+ * This BottomSheet is used to edit or delete exisiting Consumed entries.
+ * @param entry The entry that is to be edited/deleted
+ * @param confirmCallback This method is called when the user chooses confirm
+ * @param deleteCallback This method is called when the user chooses delete
+ */
 class BinaryBottomSheet(private val entry: ConsumedFood,
                         private val confirmCallback: (Consumed) -> Unit,
                         private val deleteCallback:  (Consumed) -> Unit

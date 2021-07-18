@@ -14,6 +14,12 @@ import java.lang.Math.max
 import java.text.DateFormat
 import java.util.*
 
+/**
+ * This BottomSheet allows the user to pick a week and a year.
+ * @param callback This function is called with (week, year), when the user confirms the selection
+ * @param startWeek Starting week
+ * @param startYear Starting year
+ */
 class WeekPicker(private val callback: (week: Int, year: Int) -> Unit,
                  private var startWeek: Int, private var startYear: Int)
     : BottomSheetDialogFragment() {
@@ -31,6 +37,7 @@ class WeekPicker(private val callback: (week: Int, year: Int) -> Unit,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.weekpicker_bottom_sheet, container, false)
+        // TODO: Switch to ViewBinding
         weekNumberPicker = view.findViewById(R.id.weekNumberPicker)
         yearNumberPicker = view.findViewById(R.id.yearNumberPicker)
         weekTitle        = view.findViewById(R.id.weekTitle)

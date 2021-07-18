@@ -3,6 +3,10 @@ package com.paulaumann.nutrients.data
 import androidx.room.TypeConverter
 import java.util.*
 
+/**
+ * Converter functions used by Room to convert from Date to Long timestamps
+ */
+
 class Converters {
 
     @TypeConverter

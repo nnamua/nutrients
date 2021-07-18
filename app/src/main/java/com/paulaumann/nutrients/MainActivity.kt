@@ -11,6 +11,10 @@ import com.paulaumann.nutrients.viewmodel.DBViewerViewModel
 import com.paulaumann.nutrients.viewmodel.PlanViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Main Activity and entry point of the application.
+ */
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

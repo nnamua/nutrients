@@ -13,6 +13,10 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * ViewModel for the HistoryFragment
+ */
+
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     private val foodRepository: FoodRepository

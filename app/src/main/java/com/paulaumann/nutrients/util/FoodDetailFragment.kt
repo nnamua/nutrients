@@ -13,6 +13,11 @@ import com.paulaumann.nutrients.databinding.FragmentFoodDetailBinding
 import com.paulaumann.nutrients.viewmodel.FoodDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment displays a detailed list of a Food object.
+ * @see FoodDataListAdapter
+ */
+
 @AndroidEntryPoint
 class FoodDetailFragment : BaseFragment() {
 

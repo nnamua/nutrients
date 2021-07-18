@@ -16,6 +16,12 @@ import com.paulaumann.nutrients.data.Food
 import com.paulaumann.nutrients.viewmodel.DBViewerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment allows the user to search in the database, and display details
+ * about any Food store there.
+ * @see Food
+ */
+
 @AndroidEntryPoint
 class DBViewerFragment : BaseFragment() {
 

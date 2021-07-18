@@ -3,6 +3,10 @@ package com.paulaumann.nutrients.data
 import androidx.room.*
 import java.util.*
 
+/**
+ * This data class models a plan_entry row in the database.
+ * It is used to store when, what and how much was consumed by the user.
+ */
 
 @Entity(
     tableName = "plan_entries",

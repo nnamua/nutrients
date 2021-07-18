@@ -4,6 +4,11 @@ import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 
+/**
+ * The Data Access Object for Food objects.
+ * @see Food
+ */
+
 @Dao
 abstract class FoodDao {
 

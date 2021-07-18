@@ -14,6 +14,10 @@ import com.paulaumann.nutrients.util.WeekPicker
 import com.paulaumann.nutrients.viewmodel.NutrientsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment displays the sum of Food objects consumed in a given week.
+ */
+
 @AndroidEntryPoint
 class NutrientsFragment : BaseFragment() {
 

@@ -5,6 +5,11 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Update
 
+/**
+ * The Data Access Object for Consumed objects.
+ * @see Consumed
+ */
+
 @Dao
 abstract class ConsumedDao {
 

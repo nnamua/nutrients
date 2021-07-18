@@ -15,6 +15,12 @@ import java.lang.Math.PI
 import kotlin.math.*
 import kotlin.math.atan
 
+/**
+ * This view shows the user whether or not his nutrient consumption
+ * is okay. It should be used in a dashboard (here HomeFragment).
+ * It can be extended to use different bars for different nutrients.
+ */
+
 open class Indicator : View {
 
     protected var varelaRound = ResourcesCompat.getFont(context, R.font.varela_round)

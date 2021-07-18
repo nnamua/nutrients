@@ -6,6 +6,10 @@ import com.paulaumann.nutrients.data.Food
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+/**
+ * ViewModel for the FoodDetailFragment
+ */
+
 @HiltViewModel
 class FoodDetailViewModel @Inject constructor(
     private val foodRepository: FoodRepository

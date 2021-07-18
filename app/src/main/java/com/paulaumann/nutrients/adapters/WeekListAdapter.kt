@@ -14,6 +14,12 @@ import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.data.ConsumedFood
 import java.util.*
 
+/**
+ * This class is the adapter for an ExpandableListView containing
+ * ConsumedFood entries for each weekday.
+ * @param activity Required for drawables
+ * @param selectedIndex Initially selected index (stored in ViewModel)
+ */
 class WeekListAdapter(private val activity: MainActivity,
                       var selectedIndex: Int
 ) : BaseExpandableListAdapter() {
@@ -65,6 +71,7 @@ class WeekListAdapter(private val activity: MainActivity,
         parent: ViewGroup?
     ): View {
         // Inflate the layout
+        // TODO: Use ViewBinding
         val day = dayNames[groupPosition]
         var view = convertView
         if (view == null){
@@ -117,6 +124,7 @@ class WeekListAdapter(private val activity: MainActivity,
         convertView: View?,
         parent: ViewGroup?
     ): View {
+        // TODO: Use ViewBinding
         val entry = getChild(groupPosition, childPosition)
         var view = convertView;
         if (view == null){

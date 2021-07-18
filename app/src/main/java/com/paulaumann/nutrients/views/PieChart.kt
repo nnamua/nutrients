@@ -12,6 +12,14 @@ import androidx.core.view.ViewCompat
 import java.lang.Integer.min
 import kotlin.properties.Delegates
 
+/**
+ * This custom View displays a pie chart. Entries
+ * can be dynamically added or cleared. When adding entries,
+ * a call to update() is required afterwards. This is not done automatically,
+ * because it is quite processing heavy, and calling it for every item (for example in a list)
+ * would be unnecessary.
+ */
+
 class PieChart : View {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -39,6 +47,14 @@ class PieChart : View {
     private lateinit var circleRect: RectF
     private lateinit var selectedRect: RectF
 
+    /**
+     * Add a value to the pie chart.
+     * A call to update() is required after adding elements!
+     * @param id Used for selection
+     * @param value Displayed value
+     * @param color Color of the slice
+     * @see PieChart#update()
+     */
     fun add(id: Int, value: Double, color: Int){
         val entry = PieChartEntry(id, value)
         entry.paint = Paint(ANTI_ALIAS_FLAG).apply {
@@ -48,10 +64,19 @@ class PieChart : View {
         entries.add(entry)
     }
 
+    /**
+     * Clears all values of the pie chart.
+     * No call to update required.
+     */
     fun clear(){
         entries.clear()
+        update()
     }
 
+    /**
+     * Updates the view (must be called explicitly after new elements were added.
+     * Has no effect when the view has not been laid out yet.
+     */
     fun update(){
         if (ViewCompat.isLaidOut(this)) {
             calculate()

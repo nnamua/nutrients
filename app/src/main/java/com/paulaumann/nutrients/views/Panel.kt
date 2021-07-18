@@ -15,6 +15,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.paulaumann.nutrients.R
 
+/**
+ * Deprecated View for the HomeFragment.
+ */
+
 class Panel(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
 
     init {

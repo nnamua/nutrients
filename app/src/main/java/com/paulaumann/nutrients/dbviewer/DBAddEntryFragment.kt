@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter
 import com.paulaumann.nutrients.BaseFragment
 import com.paulaumann.nutrients.databinding.FragmentDbviewerAddBinding
 
+/**
+ * This Fragment allows the user to add various entries to the database.
+ */
 class DBAddEntryFragment : BaseFragment() {
 
     private var _binding: FragmentDbviewerAddBinding? = null

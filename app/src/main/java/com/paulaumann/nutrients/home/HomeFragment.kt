@@ -10,6 +10,11 @@ import com.paulaumann.nutrients.R
 import com.paulaumann.nutrients.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment is used as the home screen for the application.
+ * It allows the user to navigate to every other part of the app.
+ */
+
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
 
@@ -38,6 +43,7 @@ class HomeFragment : BaseFragment() {
         }
         binding.mainProfile.setOnClickListener {
             // Launch ProfileFragment
+            // TODO: Remove TODO Fragment
             navController.navigate(R.id.action_homeFragment_to_todoFragment)
         }
         binding.mainNutrients.setOnClickListener {

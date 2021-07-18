@@ -8,6 +8,10 @@ import com.paulaumann.nutrients.BaseFragment
 import com.paulaumann.nutrients.databinding.FragmentTodoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment displays a message that the functionality has not been implemented yet.
+ */
+
 @AndroidEntryPoint
 class TodoFragment : BaseFragment() {
 
@@ -21,6 +25,15 @@ class TodoFragment : BaseFragment() {
     ): View {
         _binding = FragmentTodoBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Set listener to back button
+        binding.todoBack.setOnClickListener {
+            navController.popBackStack()
+        }
     }
 
     override fun onDestroyView() {

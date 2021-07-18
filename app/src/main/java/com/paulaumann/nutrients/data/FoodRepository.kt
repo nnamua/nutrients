@@ -5,6 +5,14 @@ import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * This repository provides various functions to retrieve Food objects and ConsumedFood objects
+ * from the database.
+ * @see Food
+ * @see ConsumedFood
+ * @see FoodDao
+ */
+
 @Singleton
 class FoodRepository @Inject constructor(
     private val appDatabase: AppDatabase

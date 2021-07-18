@@ -11,6 +11,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel for the DBViewerFragment
+ */
+
 @HiltViewModel
 class DBViewerViewModel @Inject internal constructor(
     private val foodRepository: FoodRepository,

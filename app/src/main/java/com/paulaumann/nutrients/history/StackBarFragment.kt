@@ -13,6 +13,12 @@ import com.paulaumann.nutrients.data.Food
 import com.paulaumann.nutrients.databinding.HistoryStackbarBinding
 import com.paulaumann.nutrients.views.StackBarChart
 
+/**
+ * This Fragment displays a stack bar chart containing the shares
+ * of different ConsumedFood entries for a certain data field (nutrient)
+ * Deprecated because of bad UX.
+ */
+
 class StackBarFragment(private val pos: Int,
                        private val entries: LiveData<List<ConsumedFood>>
 ) : Fragment() {
@@ -33,8 +39,6 @@ class StackBarFragment(private val pos: Int,
         entries.observe(viewLifecycleOwner) {
             updateChart(it)
         }
-        //binding.historyStackBarChart.add("A", 2.0)
-        //binding.historyStackBarChart.add("X", 5.0)
     }
 
     private fun updateChart(weeklyList: List<ConsumedFood>){

@@ -14,6 +14,10 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * ViewModel for the NutrientsFragment
+ */
+
 @HiltViewModel
 class NutrientsViewModel @Inject constructor(
     private val foodRepository: FoodRepository

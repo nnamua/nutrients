@@ -225,7 +225,6 @@ open class Indicator : View {
     }
 
     override fun performClick(): Boolean {
-        Log.d("Indicator", "performClick()")
         invalidate()
         return super.performClick()
     }

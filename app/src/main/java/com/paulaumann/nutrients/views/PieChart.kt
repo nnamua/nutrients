@@ -62,6 +62,7 @@ class PieChart : View {
             style = Paint.Style.FILL_AND_STROKE
         }
         entries.add(entry)
+        calculate() //TODO: This shouldn't be necessary
     }
 
     /**

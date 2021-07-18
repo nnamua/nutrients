@@ -74,8 +74,9 @@ class PieChartFragment(private val pos: Int,
         for (group in byFood.values){
             var sum = 0.0
             for (consumedFood in group){
-                val value = consumedFood.food[pos + 4] as Number
-                sum += value.toDouble()
+                val food = consumedFood.food
+                val value = food[pos + 4] as Number
+                sum += value.toDouble() * (consumedFood.consumed.amount / food.getReferenceAmount())
             }
             // If the value is less than this threshold, ignore it
             if (sum < 0.0001) continue
